@@ -4,11 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TB_PRODUCTS")
@@ -21,6 +17,10 @@ public class ProductModel implements Serializable {
 	private UUID idProduct;
 	private String name;
 	private BigDecimal value;
+
+	@ManyToOne
+	@JoinColumn(name = "categoria_id") //identificação da coluna da tabela
+	private CategoriaModel categoria;
 
 	public UUID getIdProduct() {
 		return idProduct;
@@ -46,4 +46,11 @@ public class ProductModel implements Serializable {
 		this.value = value;
 	}
 
+	public CategoriaModel getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(CategoriaModel categoria) {
+		this.categoria = categoria;
+	}
 }
