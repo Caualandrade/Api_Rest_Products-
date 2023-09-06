@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.example.springboot.dtos.CategoriaRecordDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,7 @@ public class ProductController {
 	public ResponseEntity<ProductModel> saveProduct(@RequestBody @Valid ProductRecordDTO productRecordDTO) {
 		var productModel = new ProductModel();
 		BeanUtils.copyProperties(productRecordDTO, productModel);
+		productModel.setCategoria(productRecordDTO.categoriaModel());
 		return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(productModel));
 	}
 
